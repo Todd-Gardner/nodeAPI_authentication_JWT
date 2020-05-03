@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
+//*** min and max not working ***/
 const userSchema = new mongoose.Schema({
-    userName: {
+    name: {
         type: String,
         required: true,
         min: 6,
