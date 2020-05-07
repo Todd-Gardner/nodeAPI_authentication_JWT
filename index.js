@@ -22,7 +22,4 @@ app.use(express.json());
 //Route Middlewares
 app.use("/api/user", authRoute); // when go to /user - use authRoute
 
-
 app.listen(3000, () => console.log("----- Server started -----"));
-
-//toddG
