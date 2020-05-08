@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const User = require("../models/User");
-const {registerValidation} = require("../validation");
-
+const { registerValidation } = require("../validation");
 
 //Auth routes (/api/user/...)
 router.post("/register", async (req, res) => {
@@ -10,10 +9,15 @@ router.post("/register", async (req, res) => {
   //Validate before creating a User
   const { error } = registerValidation(req.body); //validate body with schema, returns object
   if (error) {
-    console.log("error", error);
+    console.log("error: ", error);
     return res.status(400).send(error.details[0].message);
   }
 
+  //Check the DB to see if the user has already registered
+  const emailExists = await User.findOne({ email: req.body.email });
+  if (emailExists) return res.status(400).send("You have already registered!");
+
+  //Create a new user
   const user = new User({
     name: req.body.name,
     email: req.body.email,
