@@ -5,6 +5,7 @@ const mongoose = require("mongoose"); //to connect to mongoDB
 
 //Import routes
 const authRoute = require("./routes/auth");
+const postRoute = require("./routes/posts");
 
 dotenv.config(); //initiate env variables
 
@@ -21,5 +22,6 @@ mongoose.connect(
 app.use(express.json());
 //Route Middlewares
 app.use("/api/user", authRoute); // when go to /user - use authRoute
+app.use("/api/posts", postRoute);
 
 app.listen(3000, () => console.log("----- Server started -----"));
